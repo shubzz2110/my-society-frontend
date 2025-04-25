@@ -1,0 +1,18 @@
+@import './dialog';
+@import './button';
+
+.p-confirmdialog .p-dialog-header .p-dialog-title {
+    @apply text-[24px] leading-8;
+}
+
+.p-confirmdialog-message {
+    @apply text-surface-800 font-normal text-base leading-6;
+}
+
+.p-confirmdialog .p-dialog-content {
+    @apply flex items-center gap-4
+}
+
+.p-confirmdialog-icon {
+    @apply text-surface-700 dark:text-surface-0 text-[2rem] h-8 w-8
+}

@@ -1,0 +1,67 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "assets/primevue/tailwind.css";
+@import "tailwindcss/utilities";
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --surface-0: 255 255 255;
+  --surface-50: 250 250 250;
+  --surface-100: 245 245 245;
+  --surface-200: 238 238 238;
+  --surface-300: 224 224 224;
+  --surface-400: 189 189 189;
+  --surface-500: 158 158 158;
+  --surface-600: 117 117 117;
+  --surface-700: 97 97 97;
+  --surface-800: 66 66 66;
+  --surface-900: 33 33 33;
+  --surface-950: 3 6 23;
+  --p-content-border-radius: 6px;
+  --brand: #077ee5;
+  --brand-hover: #0066bf;
+  --secondary: #facc15;
+  --accent: #10b981;
+  --background: #f8fafc;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+  -ms-overflow-style: calc(3px+2px);
+}
+
+body {
+  background: var(--background);
+  font-family: "Poppins", sans-serif;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.form-label {
+  @apply text-surface-600 font-normal text-sm leading-4;
+}
+
+.text-error {
+  @apply text-red-500 font-normal text-xs leading-3;
+}
+
+.page-header {
+  @apply text-surface-800 font-bold text-[28px] leading-7 xl:text-[35px] xl:leading-[42.36px];
+}
+.page-description {
+  @apply text-surface-500 font-normal text-sm leading-4;
+}
