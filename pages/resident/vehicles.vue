@@ -87,10 +87,10 @@
       :fetchMyVehicles="fetchMyVehicles"
     />
     <ResidentFamilyMemberEditFamilyMemberModal
-      v-if="showEditFamilyMemberModal"
-      :showModal="showEditFamilyMemberModal"
-      :vehicle="selectedMember || {}"
-      @closeModal="closeEditFamilyMemberModal"
+      v-if="showEditVehicleModal"
+      :showModal="showEditVehicleModal"
+      :vehicle="selectedVehicle || {}"
+      @closeModal="closeEditVehicleModal"
       :fetchMyVehicles="fetchMyVehicles"
     /> -->
     <ResidentVehicleCreateVehicleModal
@@ -98,6 +98,13 @@
       :show-modal="showCreateVehicleModal"
       :fetch-my-vehicles="fetchMyVehicles"
       @close-modal="showCreateVehicleModal = false"
+    />
+    <ResidentVehicleEditVehicleModal
+      v-if="showEditVehicleModal"
+      :show-modal="showEditVehicleModal"
+      :fetch-my-vehicles="fetchMyVehicles"
+      @close-modal="closeEditVehicleModal"
+      :vehicle="selectedVehicle || {}"
     />
   </div>
 </template>
@@ -121,8 +128,8 @@ const showCreateVehicleModal = ref<boolean>(false);
 const searchQuery = ref<string>("");
 const menuRefs = ref<Record<string, any>>({});
 const vehicles = ref<Vehicle[]>([]);
-const showEditFamilyMemberModal = ref<boolean>(false);
-const selectedMember = ref<Vehicle | null>(null);
+const showEditVehicleModal = ref<boolean>(false);
+const selectedVehicle = ref<Vehicle | null>(null);
 const loading = ref<boolean>(false);
 
 const getMenuItems = (vehicle: Vehicle): MenuItem[] => {
@@ -133,7 +140,7 @@ const getMenuItems = (vehicle: Vehicle): MenuItem[] => {
         {
           label: "Edit",
           icon: "pi pi-pencil",
-          command: () => openShowEditFamilyMemberModal(vehicle),
+          command: () => openShowEditVehicleModal(vehicle),
         },
         {
           label: "Remove",
@@ -153,7 +160,7 @@ const getMenuItems = (vehicle: Vehicle): MenuItem[] => {
                 label: "Delete",
                 severity: "danger",
               } as ButtonProps,
-              accept: () => removevVehicle(vehicle),
+              accept: () => removeVehicle(vehicle),
               reject: () => {
                 toast.add({
                   severity: "error",
@@ -190,17 +197,17 @@ const fetchMyVehicles = async () => {
   }
 };
 
-const openShowEditFamilyMemberModal = (vehicle: Vehicle) => {
-  showEditFamilyMemberModal.value = true;
-  selectedMember.value = vehicle;
+const openShowEditVehicleModal = (vehicle: Vehicle) => {
+  showEditVehicleModal.value = true;
+  selectedVehicle.value = vehicle;
 };
 
-const closeEditFamilyMemberModal = () => {
-  showEditFamilyMemberModal.value = false;
-  selectedMember.value = null;
+const closeEditVehicleModal = () => {
+  showEditVehicleModal.value = false;
+  selectedVehicle.value = null;
 };
 
-const removevVehicle = async (vehicle: Vehicle) => {
+const removeVehicle = async (vehicle: Vehicle) => {
   try {
     startLoading();
     const data = await $api.delete("/vehicle/delete-vehicle", {

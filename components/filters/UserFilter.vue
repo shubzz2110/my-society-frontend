@@ -9,7 +9,7 @@
       placeholder="Filter by status"
       @update:model-value="(val) => updateFilter('status', val)"
     />
-    <Select
+    <!-- <Select
       :options="roles"
       option-label="name"
       option-value="code"
@@ -17,7 +17,7 @@
       class="min-w-60"
       placeholder="Filter by role"
       @update:model-value="(val) => updateFilter('role', val)"
-    />
+    /> -->
     <Select
       :options="wings"
       option-label="name"
@@ -52,11 +52,11 @@ enum StatusesOptions {
   DISABLED = "disabled",
 }
 
-enum RoleOptions {
-  RESIDENT = "resident",
-  SECURITY = "security",
-  ADMIN = "admin",
-}
+// enum RoleOptions {
+//   RESIDENT = "resident",
+//   SECURITY = "security",
+//   ADMIN = "admin",
+// }
 
 const statuses = ref<SelectOption[]>([
   { name: "Pending", code: StatusesOptions.PENDING },
@@ -65,11 +65,11 @@ const statuses = ref<SelectOption[]>([
   { name: "Disabled", code: StatusesOptions.DISABLED },
 ]);
 
-const roles = ref<SelectOption[]>([
-  { name: "Resident", code: RoleOptions.RESIDENT },
-  { name: "Security", code: RoleOptions.SECURITY },
-  { name: "Admin", code: RoleOptions.ADMIN },
-]);
+// const roles = ref<SelectOption[]>([
+//   { name: "Resident", code: RoleOptions.RESIDENT },
+//   { name: "Security", code: RoleOptions.SECURITY },
+//   { name: "Admin", code: RoleOptions.ADMIN },
+// ]);
 
 const wings = ref<SelectOption[]>([
   { name: "A", code: "A" },

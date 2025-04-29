@@ -78,7 +78,6 @@
         </Column>
         <Column header="Wing" field="wing"></Column>
         <Column header="Flat No." field="flatNumber"></Column>
-        <Column class="capitalize" header="Role" field="role"></Column>
         <Column header="Status" field="status" class="capitalize">
           <template #body="{ data }">
             <h1

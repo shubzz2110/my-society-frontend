@@ -2,11 +2,11 @@
 @import './inputtext';
 
 .p-datepicker {
-    @apply inline-flex max-w-full
+    @apply inline-flex max-w-full w-full
 }
 
 .p-datepicker-input {
-    @apply flex-auto w-[1%]
+    @apply flex-auto w-[1%] pl-10
 }
 
 .p-datepicker:has(.p-datepicker-dropdown) .p-datepicker-input {

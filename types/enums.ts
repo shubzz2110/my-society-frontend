@@ -13,7 +13,17 @@ export enum Relation {
 }
 
 export enum VehicleType {
-  CAR = 'car',
-  BIKE = 'bike',
-  OTHER = 'other'
+  CAR = "car",
+  BIKE = "bike",
+  OTHER = "other",
+}
+
+export enum InvoiceType {
+  MAINTENANCE = "maintenance",
+  BOOKING = "booking",
+}
+
+export enum PenaltyType {
+  FIXED = "fixed",
+  PERCENTAGE = 'percentage'
 }

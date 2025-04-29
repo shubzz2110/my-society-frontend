@@ -12,7 +12,7 @@
       <span class="!text-red-500">*</span>Indicates required fields
     </p>
     <form
-      @submit.prevent="handleSubmitAddVehicleForm"
+      @submit.prevent="handleSubmitUpdateVehicleForm"
       method="post"
       class="flex flex-col w-full h-full space-y-5"
     >
@@ -79,7 +79,9 @@
         }}</span>
       </div>
       <div class="flex flex-col space-y-2.5">
-        <label for="id-parking-slot" class="form-label">Parking Number / Slot: </label>
+        <label for="id-parking-slot" class="form-label"
+          >Parking Number / Slot:
+        </label>
         <IconField>
           <InputIcon class="pi pi-clipboard" />
           <InputNumber
@@ -98,7 +100,7 @@
         <Button
           type="submit"
           severity="brand"
-          label="Add vehicle"
+          label="Update vehicle"
           :loading="isLoading"
         />
       </div>
@@ -113,6 +115,7 @@ import { VehicleType } from "@/types/enums";
 const props = defineProps({
   showModal: { type: Boolean, required: true },
   fetchMyVehicles: { type: Function, required: true },
+  vehicle: { type: Object, required: true },
 });
 
 const emits = defineEmits(["closeModal"]);
@@ -125,10 +128,10 @@ const vehicleDetails = reactive<{
   model: string;
   parkingSlot?: number | undefined;
 }>({
-  vehicleNumber: "",
-  type: "",
-  model: "",
-  parkingSlot: undefined,
+  vehicleNumber: props.vehicle.vehicleNumber,
+  type: props.vehicle.type,
+  model: props.vehicle.model,
+  parkingSlot: props.vehicle.parkingSlot || undefined,
 });
 const errors = ref<Record<string, any>>({});
 const isLoading = ref<boolean>(false);
@@ -182,13 +185,17 @@ const validateForm = async () => {
   }
 };
 
-const handleSubmitAddVehicleForm = async () => {
+const handleSubmitUpdateVehicleForm = async () => {
   if (await validateForm()) {
     try {
       isLoading.value = true;
-      const data = await $api.post("/vehicle/add-vehicle", {
-        ...vehicleDetails,
-      });
+      const data = await $api.put(
+        "/vehicle/update-vehicle-details",
+        {
+          ...vehicleDetails,
+        },
+        { params: { id: props.vehicle.id } }
+      );
       if (data.success) {
         vehicleDetails.vehicleNumber = "";
         vehicleDetails.type = "";
@@ -198,8 +205,8 @@ const handleSubmitAddVehicleForm = async () => {
         props.fetchMyVehicles();
         toast.add({
           severity: "success",
-          summary: "Vehicle added",
-          detail: "Vehicle added successfully",
+          summary: "Vehicle updated",
+          detail: "Vehicle updated successfully",
           life: 5000,
         });
       }
@@ -208,7 +215,7 @@ const handleSubmitAddVehicleForm = async () => {
       toast.add({
         severity: "error",
         summary: "An Error Occured",
-        detail: "Unable to add vehicle",
+        detail: "Unable to updated vehicle",
         life: 5000,
       });
     } finally {
